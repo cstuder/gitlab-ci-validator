@@ -1,7 +1,7 @@
 'use strict';
 // The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
-var request = require('request-light');
+var request = require('request');
 
 // Extension activation when one of the events in package.json -> activationEvents happens.
 export function activate(context: vscode.ExtensionContext) {

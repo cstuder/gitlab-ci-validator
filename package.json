@@ -38,7 +38,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "request-light": "^0.2.1"
+        "request": "^2.83.0"
     },
     "bugs": {
         "url": "https://github.com/cstuder/gitlab-ci-validator/issues",
