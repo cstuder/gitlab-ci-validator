@@ -1,14 +1,18 @@
 {
     "name": "gitlab-ci-validator",
-    "displayName": "gitlab-ci-validator",
-    "description": "Validate the content of your Gitlab CI YAML file",
+    "displayName": "GitLab CI Validator",
+    "description": "Validate the content of your GitLab CI YAML file",
     "version": "0.0.1",
     "publisher": "cstuder",
+    "license": "MIT",
     "engines": {
         "vscode": "^1.18.0"
     },
     "categories": [
         "Other"
+    ],
+    "keywords": [
+        "GitLab", "GitLab CI", "YAML"
     ],
     "activationEvents": [
         "onCommand:extension.validateCIYaml"
@@ -17,7 +21,7 @@
     "contributes": {
         "commands": [{
             "command": "extension.validateCIYaml",
-            "title": "Validate Gitlab CI YAML"
+            "title": "Validate GitLab CI YAML"
         }]
     },
     "scripts": {
@@ -32,5 +36,18 @@
         "vscode": "^1.1.6",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
-    }
+    },
+    "dependencies": {
+        "request-light": "^0.2.1"
+    },
+    "bugs": {
+        "url": "https://github.com/cstuder/gitlab-ci-validator/issues",
+        "email": "cstuder@existenz.ch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cstuder/gitlab-ci-validator.git"
+    },
+    "homepage": "https://github.com/cstuder/gitlab-ci-validator/blob/master/README.md",
+    "icon": "img/icon.png"
 }
