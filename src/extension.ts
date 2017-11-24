@@ -6,32 +6,63 @@ var request = require('request');
 // Extension activation when one of the events in package.json -> activationEvents happens.
 export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('extension.validateCIYaml', () => {
-        var success = validateCIYaml();
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage(success ? 'YAML valid.' : 'Error: YAML invalid.');
+        validateCIYaml();
     });
 
     context.subscriptions.push(disposable);
 }
 
-// Validate current YAML
+/**
+ * Validate YAML in current editor
+ * 
+ * @returns bool
+ */
 function validateCIYaml() {
     // Get YAML as text
-    var editor = vscode.window.activeTextEditor;
+    let editor = vscode.window.activeTextEditor;
     if (!editor) {
         return false; // No open text editor
     }
     
-    var text = editor.document.getText();
+    let text = editor.document.getText();
     
     // Send text to validation
     request.post('https://gitlab.com/api/v4/ci/lint', {
-        body: JSON.stringify({content: text}),
+        body: {content: text},
         json: true
     }, function(error, response, body) {
-        vscode.window.showInformationMessage(body);
-    })
+        let valid = true;
+        let errormessage = '';
+
+        if(error) {
+            // Trouble with the HTTP request
+            valid = false;
+            errormessage = 'Error calling GitLab API: ' + error.message;
+        } 
+
+        // Check response from GitLab API for general trouble
+        if(valid && 'error' in body) {
+            valid = false;
+            errormessage = 'Error with your YAML file: ' + body.error;
+        }
+    
+        // Check response from GitLab API for specific trouble
+        if(valid) {
+            let status = 'status' in body ? body.status : 'invalid';
+
+            if(status != 'valid') {
+                valid = false;
+                errormessage = 'Error in your YAML: ' + body.errors.join(', ');
+            }
+        }
+
+        // Show result of validation
+        if(valid) {
+            vscode.window.showInformationMessage('GitLab CI YAML valid.');
+        } else {
+            vscode.window.showErrorMessage(errormessage);
+        }
+    });
 
     return true;
 }
