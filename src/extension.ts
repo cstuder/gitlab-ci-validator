@@ -27,9 +27,13 @@ function validateCIYaml() {
     let text = editor.document.getText();
     
     // Send text to validation
-    request.post('https://gitlab.com/api/v4/ci/lint', {
+    let config = vscode.workspace.getConfiguration('gitlab-ci-validator');
+    let url = config.get('gitLabURL') + '/api/v4/ci/lint';
+
+    request.post(url, {
         body: {content: text},
-        json: true
+        json: true,
+        rejectUnauthorized: !config.get('ignoreCertificateErrors')
     }, function(error, response, body) {
         let valid = true;
         let errormessage = '';
@@ -37,7 +41,7 @@ function validateCIYaml() {
         if(error) {
             // Trouble with the HTTP request
             valid = false;
-            errormessage = 'Error calling GitLab API: ' + error.message;
+            errormessage = 'Error calling GitLab API (' + url + '): ' + error.message;
         } 
 
         // Check response from GitLab API for general trouble

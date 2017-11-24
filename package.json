@@ -22,7 +22,25 @@
         "commands": [{
             "command": "extension.validateCIYaml",
             "title": "Validate GitLab CI YAML"
-        }]
+        }],
+        "configuration":[
+            {
+                "type": "object",
+                "title": "GitLab CI YAML Validator",
+                "properties": {
+                    "gitlab-ci-validator.gitLabURL": {
+                        "type": "string",
+                        "default": "https://gitlab.com",
+                        "description": "URL to the GitLab instance used for validation"
+                    },
+                    "gitlab-ci-validator.ignoreCertificateErrors": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Ignore TLS/SSL certificate errors when calling the GitLab API"
+                    }
+                }
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
