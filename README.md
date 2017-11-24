@@ -18,6 +18,10 @@ None.
 
 None.
 
+## License
+
+MIT licensed.
+
 ## Release Notes
 
 ### 1.0.0
