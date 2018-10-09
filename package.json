@@ -12,18 +12,22 @@
         "Other"
     ],
     "keywords": [
-        "GitLab", "GitLab CI", "YAML"
+        "GitLab",
+        "GitLab CI",
+        "YAML"
     ],
     "activationEvents": [
         "onCommand:extension.validateCIYaml"
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [{
-            "command": "extension.validateCIYaml",
-            "title": "Validate GitLab CI YAML"
-        }],
-        "configuration":[
+        "commands": [
+            {
+                "command": "extension.validateCIYaml",
+                "title": "Validate GitLab CI YAML"
+            }
+        ],
+        "configuration": [
             {
                 "type": "object",
                 "title": "GitLab CI YAML Validator",
