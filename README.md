@@ -2,6 +2,10 @@
 
 Visual Studio Code extension: Validate the content of your GitLab CI YAML file.
 
+> **Deprecated!** GitLab now has its official extension called [GitLab Workflow](https://marketplace.visualstudio.com/items?itemName=fatihacet.gitlab-workflow). It does much more than this extension ever planned to do.
+
+> This extension will remain available, but no longer receives any updates.
+
 ## Features
 
 Detect errors in a Gitlab CI YAML file before pushing it to the server.
